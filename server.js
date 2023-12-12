@@ -124,7 +124,7 @@ app.get('/expenses', async (req, res) => {
 
 
 
-app.post('/expenditure', authenticateToken, async (req, res) => {
+app.post('/Expenditures', authenticateToken, async (req, res) => {
   try {
     const { expense, amount, date, user } = req.body;
     const id = user._id;

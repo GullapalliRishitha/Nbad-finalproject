@@ -6,7 +6,7 @@ import Menu from '../Menu/Menu';
 
 
 
-const MonthlyExpenses = ({userData}) => {
+const MonthlyConsumption = ({userData}) => {
   // State to store dropdown values
   const [dropdownValues, setDropdownValues] = useState([]);
   // State to store selected value
@@ -30,7 +30,7 @@ const MonthlyExpenses = ({userData}) => {
   useEffect(() => {
     const fetchData = async () => {
       try {
-        const [expensesResponse, monthlyExpensesResponse] = await Promise.all([
+        const [expensesResponse, monthlyConsumptionResponse] = await Promise.all([
           axios.get('http://161.35.177.15:3001/expenses', {
             headers: {
               'X-User-ID': userData.user._id,
@@ -43,21 +43,21 @@ const MonthlyExpenses = ({userData}) => {
           }),
         ]);
   
-        const expensesData = await expensesResponse;
-        const monthlyExpensesData = await monthlyExpensesResponse;
+        const consumptionData = await consumptionResponse;
+        const monthlyConsumptionData = await monthlyConsumptionResponse;
   
-        // Handle expensesData and monthlyExpensesData as needed
-        // console.log('Expenses Data:', expensesData.data);
-        // console.log('Monthly Expenses Data:', monthlyExpensesData.data);
+        // Handle consumptionData and monthlyConsumptionData as needed
+        // console.log('Consumption Data:', consumptionData.data);
+        // console.log('Monthly Consumption Data:', monthlyConsumptionData.data);
   
         // Example: Extract unique dates from monthly expenses
-        const uniqueDatesSet = new Set(monthlyExpensesData.data.map(option => option.date));
+        const uniqueDatesSet = new Set(monthlyConsumptionData.data.map(option => option.date));
         setUniqueDatesValue(Array.from(uniqueDatesSet));
-        setFetchedData(expensesData.data);
-        //console.log(expensesData.data);
+        setFetchedData(consumptionData.data);
+        //console.log(consumptionData.data);
   
         // Example: Set dropdown values
-        setDropdownValues(monthlyExpensesData.data);
+        setDropdownValues(monthlyConsumptionData.data);
       } catch (error) {
         console.error('Error fetching data:', error);
       }
@@ -146,8 +146,8 @@ const MonthlyExpenses = ({userData}) => {
         <tbody>
           {finalResults.map((expense) => (
             <tr key={expense._id}>
-              <td>{expense.description}</td>
-              <td>{expense.amount}</td>
+              <td>{expenses.description}</td>
+              <td>{expenses.amount}</td>
             </tr>
           ))}
         </tbody>
@@ -161,4 +161,4 @@ const MonthlyExpenses = ({userData}) => {
   );
 };
 
-export default MonthlyExpenses;
+export default MonthlyConsumption;

@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const monthlyExpenseSchema = new mongoose.Schema({
   expense: {
     type: mongoose.Schema.Types.ObjectId,
-    ref: 'Expense',
+    ref: 'Expenses',
     required: true,
   },
   amount: {
@@ -22,6 +22,6 @@ const monthlyExpenseSchema = new mongoose.Schema({
   },
 });
 
-const MonthlyExpense = mongoose.model('MonthlyExpense', monthlyExpenseSchema);
+const MonthlyExpenses = mongoose.model('MonthlyExpenses', monthlyExpenseSchema);
 
-module.exports = MonthlyExpense;
+module.exports = MonthlyExpenses;

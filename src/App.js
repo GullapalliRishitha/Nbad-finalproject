@@ -1,10 +1,9 @@
-// App.js
 import React, { useEffect, useState } from 'react';
 import { Navigate, Route, BrowserRouter as Router, Routes } from 'react-router-dom';
-import ConfBudget from './ConfBudget/ConfBudget';
-import Expenditure from './Expenditure/Expenditure';
-import Home from './Home/Home';
-import MonthlyExpenses from './MonthlyExpenses/MonthlyExpenses';
+import ConfigureBudget from './ConfigureBudget/ConfigureBudget';
+import Expenditures from './Expenditures/Expenditures';
+import Homepage from './Homepage/Homepage';
+import MonthlyConsumption from './MonthlyConsumption/MonthlyConsumption';
 import SignIn from './SignIn/SignIn';
 import SignUp from './SignUp/SignUp';
 
@@ -12,10 +11,9 @@ const App = () => {
   const [user, setUser] = useState(null);
   const [token, setToken] = useState(null);
 
-  const userData = {user: user, token: token};
+  const userData = { user: user, token: token };
 
   useEffect(() => {
-    // Check if the user is authenticated (e.g., by checking a token in local storage)
     const storedUser = localStorage.getItem('user');
     const storedToken = localStorage.getItem('token');
     if (storedUser) {
@@ -33,37 +31,32 @@ const App = () => {
       return () => clearInterval(intervalId);
     }
   }, [user]);
-  const showAlertDialog = () => {
-    
-     const result = window.confirm('You have been inactive for 1 min , do you want to continue or signout?');
 
-      if (result) {
-        handleRenewToken();
-      } else {
-        handleSignOut();
-      }
+  const showAlertDialog = () => {
+    const result = window.confirm('You have been inactive for 1 min, do you want to continue or sign out?');
+
+    if (result) {
+      handleRenewToken();
+    } else {
+      handleSignOut();
+    }
   };
 
   const handleRenewToken = async () => {
     try {
-      // Make a request to the server to renew the token
       const response = await fetch('http://161.35.177.15:3001/renewToken', {
         method: 'POST',
         headers: {
           'Content-Type': 'application/json',
-          Authorization: `Bearer ${token}`, 
+          Authorization: `Bearer ${token}`,
           'X-User-ID': userData.user._id,
         },
       });
-  
-      if (response.ok) {
-        // If the renewal request is successful, get the new token from the response
-        const { token: newToken } = await response.json();
 
+      if (response.ok) {
+        const { token: newToken } = await response.json();
         setToken(newToken);
-  
       } else {
-        // Handle the case where token renewal failed
         console.error('Token renewal failed');
       }
     } catch (error) {
@@ -71,10 +64,7 @@ const App = () => {
     }
   };
 
-
   const handleSignIn = (user, token) => {
-    // Logic for signing in
-    console.log(user)
     setUser(user);
     setToken(token);
     localStorage.setItem('user', JSON.stringify(user));
@@ -82,7 +72,6 @@ const App = () => {
   };
 
   const handleSignOut = () => {
-    // Logic for signing out
     setUser(null);
     setToken(null);
     localStorage.removeItem('user');
@@ -104,10 +93,9 @@ const App = () => {
           path="/signup"
           element={user ? <Navigate to="/" /> : <SignUp onSignUp={handleSignIn} />}
         />
-        {/* Pass user data to ConfBudget component */}
-        <Route path="confBudget" element={<ConfBudget userData={userData} />} />
-        <Route path="expenditure" element={<Expenditure userData={userData}/>} />
-        <Route path="monthlyExpenses" element={<MonthlyExpenses userData={userData}/>} />
+        <Route path="configureBudget" element={<ConfigureBudget userData={userData} />} />
+        <Route path="expenditures" element={<Expenditures userData={userData} />} />
+        <Route path="monthlyConsumption" element={<MonthlyConsumption userData={userData} />} />
       </Routes>
     </Router>
   );

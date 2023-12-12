@@ -1,8 +1,8 @@
 import React, { useState } from 'react';
 import '../App.css';
-import Menu from "../Menu/Menu";
+import Menu from '../Menu/Menu';
 
-const ConfBudget = ({ userData }) => {
+const ConfigureBudget = ({ userData }) => {
   const [description, setDescription] = useState('');
   const [amount, setAmount] = useState('');
 
@@ -11,13 +11,11 @@ const ConfBudget = ({ userData }) => {
 
     try {
       const { user, token } = userData;
-      console.log(userData)
 
       if (!token) {
         console.error('No token available');
         return;
       }
-  
 
       // Call your backend API to create a new expense
       const response = await fetch('http://161.35.177.15:3001/confBudget', {
@@ -28,7 +26,6 @@ const ConfBudget = ({ userData }) => {
           'Authorization': `Bearer ${token}`, // Include the token in the Authorization header
         },
       });
-      console.log(response)
 
       if (response.ok) {
         const newExpense = await response.json();
@@ -52,16 +49,26 @@ const ConfBudget = ({ userData }) => {
         <h2>Add new Expense</h2>
         <form className="SignInForm" onSubmit={handleSubmit}>
           <label>Expense</label>
-          <input type="text" value={description} onChange={(e) => setDescription(e.target.value)} required />
+          <input
+            type="text"
+            value={description}
+            onChange={(e) => setDescription(e.target.value)}
+            required
+          />
           <br />
           <label>Budget</label>
-          <input type="number" value={amount} onChange={(e) => setAmount(e.target.value)} required />
+          <input
+            type="number"
+            value={amount}
+            onChange={(e) => setAmount(e.target.value)}
+            required
+          />
           <br />
           <button type="submit">Submit</button>
         </form>
       </div>
     </div>
   );
-}
+};
 
-export default ConfBudget;
+export default ConfigureBudget;

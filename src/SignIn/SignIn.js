@@ -1,7 +1,6 @@
-// SignIn.js
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
-import '../App.css'; // Import the CSS file
+import '../App.css';
 
 const SignIn = ({ onSignIn }) => {
   const [email, setEmail] = useState('');
@@ -11,7 +10,6 @@ const SignIn = ({ onSignIn }) => {
     e.preventDefault();
 
     try {
-      // Call your backend API to authenticate the user
       const response = await fetch('http://161.35.177.15:3001/signin', {
         method: 'POST',
         body: JSON.stringify({ email, password }),
@@ -20,24 +18,18 @@ const SignIn = ({ onSignIn }) => {
 
       if (response.ok) {
         const { user, token } = await response.json();
-        //const token = user.token;
-        //console.log(user)
-        onSignIn(user, token); // Update the user state or perform any necessary actions
+        onSignIn(user, token);
       } else {
-        // Handle authentication error
         const errorData = await response.json();
         console.error(errorData.error);
-        // You might want to show an error message to the user
       }
     } catch (error) {
       console.error('Error during sign-in:', error);
-      // Handle other errors (e.g., network issues)
     }
-    
   };
 
   return (
-    <div className="SignInContainer"> {/* Add the CSS class to the container */}
+    <div className="SignInContainer">
       <h2>Sign In</h2>
       <form className="SignInForm" onSubmit={handleSubmit}>
         <label>Email:</label>

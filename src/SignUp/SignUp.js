@@ -1,6 +1,6 @@
-// SignUp.js
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
+
 const SignUp = ({ onSignUp }) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
@@ -9,8 +9,6 @@ const SignUp = ({ onSignUp }) => {
     e.preventDefault();
 
     try {
-     
-      // Call your backend API to authenticate the user
       const response = await fetch('http://161.35.177.15:3001/signup', {
         method: 'POST',
         body: JSON.stringify({ email, password }),
@@ -19,16 +17,13 @@ const SignUp = ({ onSignUp }) => {
 
       if (response.ok) {
         const { user, token } = await response.json();
-        onSignUp(user, token); // Update the user state or perform any necessary actions
+        onSignUp(user, token);
       } else {
-        // Handle authentication error
         const errorData = await response.json();
         console.error(errorData.error);
-        // You might want to show an error message to the user
       }
     } catch (error) {
-      console.error('Error during sign-in:', error);
-      // Handle other errors (e.g., network issues)
+      console.error('Error during sign-up:', error);
     }
   };
 

@@ -31,12 +31,12 @@ const MonthlyExpenses = ({userData}) => {
     const fetchData = async () => {
       try {
         const [expensesResponse, monthlyExpensesResponse] = await Promise.all([
-          axios.get('http://localhost:3001/expenses', {
+          axios.get('http://161.35.177.15:3001/expenses', {
             headers: {
               'X-User-ID': userData.user._id,
             },
           }),
-          axios.get('http://localhost:3001/montlyExpenses', {
+          axios.get('http://161.35.177.15:3001/montlyExpenses', {
             headers: {
               'X-User-ID': userData.user._id,
             },

@@ -15,7 +15,7 @@ console.log('TLS module is available.');
 require('dotenv').config();
 
 const corsOptions = {
-  origin: 'http://localhost:3000', // Replace with the origin of your React app
+  origin: 'http://161.35.177.15:3000', // Replace with the origin of your React app
   credentials: true,
 };
 
@@ -158,6 +158,6 @@ app.get('/montlyExpenses', async (req, res) => {
 
 
 
-app.listen(port, 'localhost', () => {
+app.listen(port, '161.35.177.15', () => {
   console.log(`Server is running on port ${port}`);
 });

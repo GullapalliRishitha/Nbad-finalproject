@@ -1,6 +1,6 @@
 import axios from 'axios';
 import React, { useEffect, useState } from 'react';
-import Menu from '../Menu/Menu';
+import Menu from '../NavigationMenu/NavigationMenu';
 
 const ExpensesForm = ({ userData }) => {
   const [descriptionOptions, setDescriptionOptions] = useState([]);

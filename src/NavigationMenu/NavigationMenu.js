@@ -2,7 +2,7 @@ import React from 'react';
 import '../App.css';
 import { Link } from 'react-router-dom';
 
-function Menu() {
+function NavigationMenu() {
   return (
     <div className="menu" aria-label="Main Menu" role="navigation" itemScope itemType="https://schema.org/SiteNavigationElement">
       <ul>
@@ -17,7 +17,7 @@ function Menu() {
           </Link>
         </li>
         <li>
-          <Link itemProp="url" to="/Expenditures">
+          <Link itemProp="url" to="/expenditures">
             Add Monthly Expenses
           </Link>
         </li>
@@ -31,4 +31,4 @@ function Menu() {
   );
 }
 
-export default Menu;
+export default NavigationMenu;

@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import '../App.css';
-import Menu from '../Menu/Menu';
+import Menu from '../NavigationMenu/NavigationMenu';
 
 const ConfigureBudget = ({ userData }) => {
   const [description, setDescription] = useState('');

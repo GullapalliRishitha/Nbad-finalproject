@@ -2,7 +2,7 @@ import axios from 'axios';
 import { Chart } from 'chart.js/auto';
 import * as d3 from 'd3';
 import React, { useEffect, useRef, useState } from 'react';
-import Menu from '../Menu/Menu';
+import Menu from '../NavigationMenu/NavigationMenu';
 
 const Homepage = ({ user, onSignOut }) => {
   const chartRef = useRef(null);

@@ -2,7 +2,7 @@ import axios from 'axios';
 import * as d3 from 'd3';
 import React, { useEffect, useRef, useState } from 'react';
 import '../App.css';
-import Menu from '../Menu/Menu';
+import Menu from '../NavigationMenu/NavigationMenu';
 
 
 
